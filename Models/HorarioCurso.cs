@@ -4,24 +4,28 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GestionUsuariosCETES.Models;
 
 public class HorarioCurso{
 
     [Key]
-    public int IdHorarioCurso { get; set; }
+    public int IdHorario { get; set; }
 
-    [ForeignKey("IdCurso")]
-    [Required]
-    public Curso Curso { get; set; } = new Curso();
+   
+    public int IdCurso { get; set; }
 
     [Required]
     public DiaSemanaEnum DiaSemana { get; set; } = DiaSemanaEnum.Lunes;
 
     [Required]
-    public string HoraInicio { get; set; } = string.Empty;
+    public TimeSpan HoraInicio { get; set; } 
 
     [Required]
-    public string HoraCierre { get; set; } = string.Empty;
+    public TimeSpan HoraFin{ get; set; }
+
+    // Navegación
+    [ForeignKey(nameof(IdCurso))]
+    public Curso? Curso { get; set; }
 
     public enum DiaSemanaEnum{
         Lunes = 1,

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GestionUsuariosCETES.Models;
 
 namespace GestionUsuariosCETES.Models
 {
