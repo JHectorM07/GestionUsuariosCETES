@@ -6,9 +6,11 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="assets\logoCETES.jpg" />
+	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Views\" />
 		<Folder Include="ViewModels\" />
 	</ItemGroup>
 
@@ -25,6 +27,10 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="assets\logoCETES.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
