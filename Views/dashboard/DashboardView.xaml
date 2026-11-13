@@ -1,0 +1,149 @@
+﻿<UserControl x:Class="GestionUsuariosCETES.Views.dashboard.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Background="Transparent">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="CetesGold" Color="#B88B4A" />
+        <SolidColorBrush x:Key="CetesTextDark" Color="#332A1E" />
+        <SolidColorBrush x:Key="CetesTextMuted" Color="#7A6B56" />
+        <SolidColorBrush x:Key="BorderSubtle" Color="#EAE5DC" />
+
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderSubtle}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="20" />
+        </Style>
+
+        <Style x:Key="QuickActionBtnStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FDFCFA" />
+            <Setter Property="Foreground" Value="{StaticResource CetesTextDark}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderSubtle}" />
+            <Setter Property="BorderThickness" Value="1.5" />
+            <Setter Property="FontSize" Value="13.5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Height" Value="44" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="14,0">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#F7F1E8" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource CetesGold}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Margin="0,0,0,22">
+            <StackPanel DockPanel.Dock="Left">
+                <TextBlock Text="Panel General" FontSize="24" FontWeight="Bold" Foreground="{StaticResource CetesTextDark}" />
+                <TextBlock Text="Resumen académico y financiero de CETES" FontSize="13.5" Foreground="{StaticResource CetesTextMuted}" Margin="0,3,0,0" />
+            </StackPanel>
+            <TextBlock x:Name="TxtFechaActual" DockPanel.Dock="Right" Text="Viernes, 13 de Noviembre 2026" FontSize="13" Foreground="{StaticResource CetesTextMuted}" VerticalAlignment="Bottom" />
+        </DockPanel>
+
+        <Grid Grid.Row="1" Margin="0,0,0,22">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}" BorderBrush="{StaticResource CetesGold}" BorderThickness="0,4,0,0">
+                <StackPanel>
+                    <TextBlock Text="ALUMNOS REGISTRADOS" FontSize="11.5" FontWeight="Bold" Foreground="{StaticResource CetesTextMuted}" />
+                    <TextBlock x:Name="TxtTotalAlumnos" Text="0" FontSize="28" FontWeight="Bold" Foreground="{StaticResource CetesTextDark}" Margin="0,8,0,2" />
+                    <TextBlock Text="Estudiantes en base de datos" FontSize="12" Foreground="{StaticResource CetesTextMuted}" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource CardStyle}" BorderBrush="#3B82F6" BorderThickness="0,4,0,0">
+                <StackPanel>
+                    <TextBlock Text="CURSOS DISPONIBLES" FontSize="11.5" FontWeight="Bold" Foreground="{StaticResource CetesTextMuted}" />
+                    <TextBlock x:Name="TxtCursosActivos" Text="0" FontSize="28" FontWeight="Bold" Foreground="{StaticResource CetesTextDark}" Margin="0,8,0,2" />
+                    <TextBlock Text="Talleres técnicos activos" FontSize="12" Foreground="{StaticResource CetesTextMuted}" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="4" Style="{StaticResource CardStyle}" BorderBrush="#10B981" BorderThickness="0,4,0,0">
+                <StackPanel>
+                    <TextBlock Text="INGRESOS DEL MES" FontSize="11.5" FontWeight="Bold" Foreground="{StaticResource CetesTextMuted}" />
+                    <TextBlock x:Name="TxtIngresosMes" Text="$0.00" FontSize="28" FontWeight="Bold" Foreground="#059669" Margin="0,8,0,2" />
+                    <TextBlock Text="Total recaudado en abonos" FontSize="12" Foreground="{StaticResource CetesTextMuted}" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="6" Style="{StaticResource CardStyle}" BorderBrush="#F59E0B" BorderThickness="0,4,0,0">
+                <StackPanel>
+                    <TextBlock Text="SALDOS PENDIENTES" FontSize="11.5" FontWeight="Bold" Foreground="{StaticResource CetesTextMuted}" />
+                    <TextBlock x:Name="TxtSaldosPendientes" Text="$0.00" FontSize="28" FontWeight="Bold" Foreground="#D97706" Margin="0,8,0,2" />
+                    <TextBlock Text="Por cobrar en inscripciones" FontSize="12" Foreground="{StaticResource CetesTextMuted}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Últimos Abonos Registrados" FontSize="16" FontWeight="Bold" Foreground="{StaticResource CetesTextDark}" Margin="0,0,0,14" />
+                    <DataGrid x:Name="GridUltimosPagos" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#F1ECE4" BorderThickness="0" Background="White" RowHeight="38" ColumnHeaderHeight="36">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Fecha" Binding="{Binding FechaPago, StringFormat=dd/MM/yyyy}" Width="100" />
+                            <DataGridTextColumn Header="Alumno" Binding="{Binding NombreAlumno}" Width="*" />
+                            <DataGridTextColumn Header="Curso" Binding="{Binding NombreCurso}" Width="*" />
+                            <DataGridTextColumn Header="Método" Binding="{Binding MetodoPago}" Width="110" />
+                            <DataGridTextColumn Header="Monto" Binding="{Binding Monto, StringFormat=C2}" Width="95" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Acciones Rápidas" FontSize="16" FontWeight="Bold" Foreground="{StaticResource CetesTextDark}" Margin="0,0,0,6" />
+                    <TextBlock Text="Atajos frecuentes de administración" FontSize="12.5" Foreground="{StaticResource CetesTextMuted}" Margin="0,0,0,18" />
+                    <Button x:Name="BtnRapidoNuevoAlumno" Content="➕  Registrar Nuevo Alumno" Style="{StaticResource QuickActionBtnStyle}" />
+                    <Button x:Name="BtnRapidoInscripcion" Content="📝  Matricular en Curso" Style="{StaticResource QuickActionBtnStyle}" />
+                    <Button x:Name="BtnRapidoPago" Content="💵  Registrar Nuevo Abono" Style="{StaticResource QuickActionBtnStyle}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
