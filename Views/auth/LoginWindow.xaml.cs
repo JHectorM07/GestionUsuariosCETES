@@ -1,7 +1,5 @@
 ﻿using GestionUsuariosCETES.Data;
 using GestionUsuariosCETES.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,44 +13,46 @@ namespace GestionUsuariosCETES.Views.auth
             TxtUsuario.Focus();
         }
 
-
-
         private void BtnIngresar_Click(object sender, RoutedEventArgs e)
         {
             string user = TxtUsuario.Text.Trim();
             string pass = TxtPassword.Password;
 
-                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass)) { 
-                    LblError.Text = "Por favor, completa todos los campos.";
-                    LblError.Visibility = Visibility.Visible;
-                    return;
-                }
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
+            {
+                MostrarError("Por favor, completa todos los campos.");
+                return;
+            }
 
+            try
+            {
                 using var db = new GestionUsuariosContext();
                 var usuarioValido = db.Usuarios
                     .FirstOrDefault(u => u.Nombre == user && u.PasswordHash == pass);
 
-                if(usuarioValido == null)
+                if (usuarioValido == null)
                 {
-                    LblError.Text = "Usuario o contraseña incorrectos.";
-                    LblError.Visibility = Visibility.Visible;
-                    TxtPassword.Clear();
-                    TxtPassword.Focus();
+                    MostrarError("Usuario o contraseña incorrectos.");
+                    return;
                 }
 
-                if (usuarioValido != null)
-                {
-                    var main = new MainWindow();
-                    main.Show();
-                    this.Close();
-                }
-                else {
-                    LblError.Text = "Usuario o contraseña incorrectos";
-                    LblError.Visibility = Visibility.Visible;
-                    TxtPassword.Clear();
-                    TxtPassword.Focus();
-                }
+                var main = new MainWindow();
+                main.Show();
+                this.Close();
             }
+            catch (Exception ex)
+            {
+                MostrarError("No se pudo conectar con la base de datos: " + ex.Message);
+            }
+        }
+
+        private void MostrarError(string mensaje)
+        {
+            LblError.Text = mensaje;
+            LblError.Visibility = Visibility.Visible;
+            TxtPassword.Clear();
+            TxtPassword.Focus();
+        }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

@@ -13,10 +13,16 @@ namespace GestionUsuariosCETES.Data
         {
         }
 
+        public GestionUsuariosContext(DbContextOptions<GestionUsuariosContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Pago> Pagos { get; set; }
+        public DbSet<Alumnos> Alumnos { get; set; }
 
         public DbSet<HorarioCurso> HorariosCurso { get; set; }
         public DbSet<Inscripcion> Inscripciones { get; set; }
@@ -26,7 +32,7 @@ namespace GestionUsuariosCETES.Data
             if (!optionsBuilder.IsConfigured)
             {
                 var config = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .SetBasePath(AppContext.BaseDirectory)
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .Build();
 

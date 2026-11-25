@@ -29,7 +29,7 @@ public partial class DashboardView : UserControl
             .Sum(i => (decimal?)i.MontoAcordado) ?? 0;
 
         var totalAbonado = db.Pagos
-            .Where(p => p.Inscripcion.EstadoInscripcion == Models.EstadoInscripcionEnum.Activa)
+            .Where(p => p.Inscripcion!.EstadoInscripcion == Models.EstadoInscripcionEnum.Activa)
             .Sum(p => (decimal?)p.Monto) ?? 0;
 
         var saldosPendientes = totalAcordado - totalAbonado;
@@ -46,8 +46,8 @@ public partial class DashboardView : UserControl
             .Select(p => new
             {
                 FechaPago = p.FechaPago,
-                NombreAlumno = p.Inscripcion.Cliente.Nombres + " " + p.Inscripcion.Cliente.Apellidos,
-                NombreCurso = p.Inscripcion.Curso.NombreCurso,
+                NombreAlumno = p.Inscripcion!.Cliente!.Nombres + " " + p.Inscripcion.Cliente.Apellidos,
+                NombreCurso = p.Inscripcion.Curso!.NombreCurso,
                 MetodoPago = p.MetodoPago,
                 Monto = p.Monto
             })

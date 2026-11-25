@@ -18,7 +18,7 @@ namespace GestionUsuariosCETES.Models
 
         [Required]
         [MaxLength(500)]
-        public string Lugar { get; set; }
+        public string Lugar { get; set; } = string.Empty;
 
         [Required]
         
@@ -33,7 +33,7 @@ namespace GestionUsuariosCETES.Models
         [Required]
         public bool Estado { get; set; } = true;
 
-        // Navegación
+        // NavegaciÃ³n
         public ICollection<HorarioCurso> Horarios { get; set; } = new List<HorarioCurso>();
         public ICollection<Inscripcion> Inscripciones { get; set; } = new List<Inscripcion>();
 
